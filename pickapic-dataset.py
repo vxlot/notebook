@@ -1,29 +1,46 @@
-# export HF_ENDPOINT=https://hf-mirror.com
-# export HF_HOME="/ifs/root/ipa01/110/user_110003/download"
+"""
+Pick-a-Pic Dataset Loader Script (2025.4.13 by user 110003)
+
+Description:
+    This script loads the Pick-a-Pic v2 dataset from Hugging Face,
+    demonstrates basic operations, and saves a subset for quick testing.
+
+Might set if you want to download a new version of the dataset:
+    - export HF_ENDPOINT=https://hf-mirror.com
+    - export HF_HOME="your local cache directory" if you dont't specify the `cache_dir`
+"""
+
 
 from datasets import load_dataset
-from datasets import get_dataset_split_names
-
-# 这个数据集太大了 可以只下载一个parque文件测试
-# dataset = load_dataset("yuvalkirstain/pickapic_v2")
 
 
-dataset = load_dataset("yuvalkirstain/pickapic_v2", cache_dir="/ifs/root/ipa01/110/user_110003/picapic_v2")
-# ds = load_dataset("yuvalkirstain/pickapic_v1")
 
-# from datasets import load_dataset
-# import io
-# from PIL import Image
+def load_pickapic_dataset(cache_dir=None):
+    try:
+        print("⏳ Loading dataset...")
+        dataset = load_dataset(
+            "yuvalkirstain/pickapic_v2",
+            cache_dir=cache_dir
+        )
+        print("✅ Dataset loaded successfully!")
+        return dataset
+    except Exception as e:
+        print(f"❌ Error loading dataset: {e}")
+        raise
 
 
-# dataset = load_dataset("parquet", data_files="/ifs/root/ipa01/110/user_110003/download/hub/datasets--yuvalkirstain--pickapic_v2/snapshots/12d45c8a6fcbc35c18a067efb24d993caaf4b8a7/data/test-00000-of-00014-387db523fa7e7121.parquet")
-print(dataset['train'].column_names)
-print(dataset['train']['label'][0])
+def info(dataset):
+    print("\n📊 Dataset Structure:")
+    print(f"- Number of splits: {len(dataset)}")
+    print(f"- Train samples: {len(dataset['train'])}")
+    print(f"- Validation samples: {len(dataset['validation'])}")
+    
+    print("\n📝 Sample columns:")
+    print(dataset['train'].column_names)
 
-# im_scalar = dataset['train']['jpg_0'][0]  
-# im_bytes = im_scalar.as_buffer().to_pybytes() 
-# Image.open(io.BytesIO(im_bytes)).convert("RGB").save("jpg_0.png")
 
-# im_scalar = dataset.data['train']['jpg_1'][0]  
-# im_bytes = im_scalar.as_buffer().to_pybytes() 
-# Image.open(io.BytesIO(im_bytes)).convert("RGB").save("jpg_1.png")
+
+if __name__ == "__main__":
+    DATA_CACHE_DIR="/ifs/root/ipa01/110/user_110003/picapic_v2"
+    dataset = load_pickapic_dataset(cache_dir=DATA_CACHE_DIR)
+    info(dataset)
