@@ -11,7 +11,7 @@ some notification about deep learning
 Traceback (most recent call last):
   File ".../accelerate/commands/config/config_args.py", line 135, in from_yaml_file
     return cls(**config_dict)
-TypeError: __init__() got an unexpected keyword argument 'debug'
+TypeError: __init__() got an unexpected keyword argument 'debug' ```
 
 该错误是由于 accelerate launch 默认会读取缓存目录下的配置文件（例如：~/.cache/huggingface/accelerate/default_config.yaml），其中包含了当前版本不支持的字段 debug，导致构造配置类时报错。
 
@@ -41,7 +41,5 @@ where the cached_download() function has been fully removed.
 Downgrading to an earlier version of huggingface_hub should resolve this problem.
 
 ```bash
-pip install huggingface_hub==0.23.0
+pip install huggingface_hub==0.23.0 ```
 
-```bash
-pip install huggingface_hub==0.23.0
