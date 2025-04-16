@@ -30,3 +30,12 @@ What GPU(s) (by id) should be used for training on this machine as a comma-separ
     如果打算使用所有 GPU，直接按回车即可
 
 配置完后，将自动生成新的默认配置文件，之后运行 ./run.sh 即可正常启动。
+
+
+## 🐛 Diffusers 报错：`Cannot import "cached_download" from "huggingface_hub"`
+
+### ❓ 报错信息  
+
+This issue seems to arise from a breaking change in huggingface_hub version 0.26.0, where the cached_download() function has been fully removed. Downgrading to an earlier version of huggingface_hub should resolve this problem.
+```bash
+pip install huggingface_hub==0.23.0
