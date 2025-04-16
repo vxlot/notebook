@@ -39,3 +39,6 @@ What GPU(s) (by id) should be used for training on this machine as a comma-separ
 This issue seems to arise from a breaking change in huggingface_hub version 0.26.0, where the cached_download() function has been fully removed. Downgrading to an earlier version of huggingface_hub should resolve this problem.
 ```bash
 pip install huggingface_hub==0.23.0
+
+```bash
+pip install huggingface_hub==0.23.0
