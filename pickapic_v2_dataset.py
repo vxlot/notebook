@@ -26,7 +26,7 @@ def parse_args():
     parser.add_argument(
         "--pretrained_model_name_or_path",
         type=str,
-        default="runwayml/stable-diffusion-v1-5",
+        default="stabilityai/stable-diffusion-xl-base-1.0",
         help="Path to pretrained model or model identifier from huggingface.co/models.",
     )
     parser.add_argument(
@@ -160,7 +160,7 @@ tokenizer = CLIPTokenizer.from_pretrained(
 )
 
 if __name__ == "__main__":
-    DATA_CACHE_DIR="/ifs/root/ipa01/110/user_110003/pickapic_v2_test"
+    DATA_CACHE_DIR="/ifs/root/data/common/Pick-a-Pic/picapic-v2"
     dataset = load_pickapic_dataset(cache_dir=DATA_CACHE_DIR)
     info(dataset)
     train_dataset = dataset['train'].with_transform(preprocess_train)
